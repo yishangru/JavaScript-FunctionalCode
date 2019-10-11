@@ -175,7 +175,6 @@ d3.csv('cars.csv', dataPreprocessor).then(function(dataset) {
                     .attr('transform', 'translate('+[-26, cellHeight / 2]+')rotate(270)');
             });
 
-        // ********* Your data dependent code goes here *********//
         var cellEnter = chartG.selectAll('.cell')
             .data(cells)
             .enter()
@@ -191,14 +190,13 @@ d3.csv('cars.csv', dataPreprocessor).then(function(dataset) {
         cellEnter.append('g')
             .attr('class', 'brush')
             .call(brush);
-        //cellEnter.call(toolTip);
         cellEnter.each(function(cell){
             cell.init(this);
             cell.update(this, dataset);
         });
 });
 
-// ********* Your event listener functions go here *********//
+/* Event handler */
 
 function brushstart(cell) {
     // cell is the SplomCell object
