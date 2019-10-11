@@ -57,42 +57,6 @@ d3.dsv(",","earthquakes.csv", function(d){
         .y(function(d) { if(d.number < miniSolution) return yScale(miniSolution); else return yScale(d.number); })
         .curve(d3.curveMonotoneX);
 
-    var lineChartRaw = d3.select("#main").append("svg").attr("id", "rawLine");
-    yScale = d3.scaleLinear().domain(numberRange).range([svgheight - scalemargin.bottom, scalemargin.top]);
-    lineChartRaw.append("g").attr("class", "y axis").attr("transform", "translate(" + scalemargin.left + ",0)")
-    .call(d3.axisLeft(yScale));
-    lineChartRaw.selectAll(".linePlot").data(magnitudeGroup).enter().append("path").attr("class", "linePlot")
-    .attr('d', function(d){ return line(d.values); })
-    .style('stroke', function(d) { return colorMap[d.key]; });
-    lineChartRaw.append('text').attr('class', 'title')
-    .attr('transform', 'translate('+[svgwidth/2 - 220, 20]+')')
-    .text('Worldwide Earthquake stats 2000-2015');
-
-    d3.select("#main").append("div").attr("class", "pagebreak");
-
-    var lineChartSymbol = d3.select("#main").append("svg").attr("id", "symbolLine");
-    yScale = d3.scaleLinear().domain(numberRange).range([svgheight - scalemargin.bottom, scalemargin.top]);
-    lineChartSymbol.append("g").attr("class", "y axis").attr("transform", "translate(" + scalemargin.left + ",0)")
-    .call(d3.axisLeft(yScale));
-    lineChartSymbol.selectAll(".linePlot").data(magnitudeGroup).enter().append("path").attr("class", "linePlot")
-    .attr('d', function(d){ return line(d.values); })
-    .style('stroke', function(d){ return colorMap[d.key]; });
-    lineChartSymbol.append('text').attr('class', 'title')
-    .attr('transform', 'translate('+[svgwidth/2 - 300, 20]+')')
-    .text('Worldwide Earthquake stats 2000-2015 with symbols');
-
-    magnitudeGroup.forEach(function(group) {
-        group.values.forEach(function(data){
-            lineChartSymbol.append("circle")
-                .attr("cx", (function(d){ return xScale(d.year); })(data))
-                .attr("cy", (function(d){ if (d.number < miniSolution) return yScale(miniSolution); else return yScale(d.number); })(data))
-                .attr("r", (function(d){ return deathScale(yearDeathMap[d.year]); })(data))
-                .style("fill", (function(d){ return colorMap[d.magnitude]; })(data));
-        });
-    });
-
-    d3.select("#main").append("div").attr("class", "pagebreak");
-
     var lineChartSquare = d3.select("#main").append("svg").attr("id", "squareLine");
     yScale = d3.scaleSqrt().domain(numberRange).range([svgheight - scalemargin.bottom, scalemargin.top]);
     lineChartSquare.append("g").attr("class", "y axis").attr("transform", "translate(" + scalemargin.left + ",0)")
