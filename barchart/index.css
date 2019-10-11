@@ -1,0 +1,18 @@
+#bar-chart {
+	font-family: "Open Sans";
+}
+#bar-chart text{
+	font-size: 15px;
+	font-weight: bold;
+}
+#bar-chart .x-axis, #bar-chart .y-axis{
+	font-size: 13px;
+	font-weight: bold;
+}
+#bar-chart .x-axis line, #bar-chart .x-axis path, #bar-chart .y-axis line, #bar-chart .y-axis path{
+	stroke: black;
+	stroke-width: 3px;
+}
+#bar-chart rect {
+	fill : steelblue;
+}
